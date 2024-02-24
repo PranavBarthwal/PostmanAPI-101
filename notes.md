@@ -411,3 +411,58 @@ Headers are how we can add **metadata** about our requests, such as authorizatio
 
 You can think of headers like the outside of an envelope when you send a letter. The envelope has information about delivering the letter, like proof that you've paid for postage. The actual data "payload" is the letter inside the envelope.
 
+<br>
+
+## Variables in Postman (Continued)
+Previously in the "Request Parameters" section of this course, we saw how using a variable saved us time and helped reduce redundant copy-paste of the request URL using the double curly brace syntax like this: `{{variableName}}`.
+
+Remember, Postman allows you to save values as variables so that you can:  
+
+1. Reuse values to keep your work DRY (Don’t Repeat Yourself)
+
+2. Hide sensitive values like API keys from being shared publicly
+
+In this section, we will learn more about variables and introduce better practices that enable us to make dynamic requests. 
+
+### Variable scopes
+You can set variables that live at various scopes. Postman will resolve to the value at the nearest and narrowest scope.
+
+From broadest to narrowest, these scopes are global, collection, environment, data, and local.
+
+![Alt text](var-scope-v10.jpg)
+
+If a variable with the same name is declared in two different scopes, the value stored in the variable with narrowest scope will be used. For example, if there is a global variable named `username` and a local variable named `username`, the local value will be used when the request runs.
+
+We will work with collection variables today, which live at the collection level and can be accessed anywhere inside the collection.
+
+In the next section, you will learn how to set a variable via scripting.
+
+<br>
+
+## Setting variables programmatically
+
+### Scripting in Postman
+Postman allows you to add automation and dynamic behaviors to your collections with scripting.
+
+Postman will automatically execute any provided scripts during two events in the request flow:
+
+Immediately before a request is sent: pre-request script (**Pre-request Script** tab of request).
+Immediately after a response comes back: test script (**Tests** tab of request).
+In this lesson, we will focus on writing scripts in the **Tests** tab, which are executed when a response comes back from an API.
+
+### The `pm` object
+Postman has a helper object named `pm` that gives you access to data about your Postman environment, requests, responses, variables and testing utilities. 
+
+For example, you can access the JSON response body from an API with: 
+
+`pm.response.json()`
+
+You can also programmatically get collection variables like the value of `baseUrl` with:
+
+`pm.collectionVariables.get(“baseUrl”)`
+
+In addition to getting variables, you can also set them with `pm.collectionVariables.set("variableName", "variableValue")` like this:
+
+`pm.collectionVariables.set(“myVar”, “foo”)`
+
+
