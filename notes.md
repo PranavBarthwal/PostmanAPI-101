@@ -261,3 +261,129 @@ HTTP status codes are standardized responses that servers send back to clients (
 - **504 Gateway Timeout**: The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server.
 
 These status codes provide a standardized way for servers to communicate the outcome of a request, allowing clients to understand and respond appropriately. Understanding these status codes is essential for troubleshooting issues when working with web services or APIs.
+
+<br>
+
+## Variables in Postman
+
+In Postman, variables are placeholders that allow you to store and reuse values throughout your requests, scripts, and environments. They provide flexibility and efficiency in managing data, such as API endpoints, authentication tokens, or dynamic values. Here's how variables work in Postman:
+
+### Types of Variables in Postman:
+
+1. **Global Variables**:
+   - Global variables are accessible across all requests, collections, and environments within your Postman workspace.
+   - They are defined at the workspace level and can be used anywhere in your requests or scripts.
+   - Global variables are useful for storing common data that is shared among multiple requests.
+
+2. **Environment Variables**:
+   - Environment variables are specific to a particular environment within your workspace.
+   - Environments in Postman allow you to define sets of variables for different deployment environments like development, staging, or production.
+   - You can switch between environments to dynamically change the values of variables used in requests.
+
+3. **Collection Variables**:
+   - Collection variables are scoped to a specific collection and can be used across all requests within that collection.
+   - They provide a way to share data among related requests within the same collection.
+
+4. **Local Variables**:
+   - Local variables are defined and used within a specific request or script.
+   - They have the narrowest scope and are only accessible within the context in which they are defined.
+   - Local variables are useful for temporary data manipulation or for storing values during script execution.
+
+### Working with Variables in Postman:
+
+- **Setting Variables**:
+  - Variables can be set manually in the Postman UI by defining key-value pairs.
+  - They can also be set dynamically using scripts to extract values from responses, generate random data, or perform calculations.
+
+- **Using Variables**:
+  - Variables can be used in various places within Postman, including request URLs, headers, request bodies, and scripts.
+  - To use a variable, enclose its name within double curly braces (`{{variable_name}}`) in the appropriate field.
+
+- **Scope and Precedence**:
+  - Variables have different scopes (global, environment, collection, local) and precedence levels.
+  - Local variables take precedence over collection variables, which take precedence over environment variables, and so on.
+
+- **Dynamic Variables**:
+  - Postman provides built-in dynamic variables for commonly used data, such as timestamps, random numbers, and GUIDs.
+  - These dynamic variables can be inserted directly into requests or scripts without manual definition.
+
+- **Managing Variables**:
+  - Postman provides a Variables tab where you can view, edit, and manage variables for the current request, collection, or environment.
+  - You can also import/export variables to share them across different workspaces or environments.
+
+### Benefits of Using Variables in Postman:
+
+- **Flexibility**: Variables allow for dynamic and reusable values in requests and scripts.
+- **Consistency**: Centralized management of variables ensures consistent data across requests and environments.
+- **Efficiency**: Saves time by reducing the need for manual data entry and maintenance.
+- **Scalability**: Easily scale and manage variables as your project grows in complexity.
+
+In summary, variables in Postman are powerful tools for managing and manipulating data in your API testing and development workflows. They provide flexibility, efficiency, and consistency in working with dynamic values across requests, collections, and environments.
+
+
+<br>
+
+## Query Parameters
+Remember that the minimum ingredients you need to make a request are:
+
+- a request method (GET/POST/PUT/PATCH/DELETE, etc)
+- a request URL
+
+Some APIs allow you to refine your request further with key-value pairs called **query parameters**. 
+
+### Query parameter syntax
+Query parameters are added to the end of the path. They start with a question mark ?, followed by the key-value pairs in the format: `<key>=<value>`. For example, this request might fetch all photos that have landscape orientation:
+
+`GET https://some-api.com/photos?orientation=landscape`
+
+If there are multiple query parameters, each is separated by an ampersand `&`. Below two query parameters to specify the orientation and size of the photos to be returned:
+
+`GET https://some-api.com/photos?orientation=landscape&size=500x400`
+
+### Search Google - with query parameters!
+Try pasting this URL into your browser or as a GET request in Postman to make a Google search for "Postman". (If you use Postman, click the "Preview" tab in the response to view the rendered HTML!)
+
+`https://www.google.com/search?q=postman`
+
+This request adds a search term as a query parameter `q=postman` ("q" refers to "query" here) to the `GET /search` path on Google's server.
+
+Because this parameter is in our request, the server returns an HTML document that is a search results page with hits for "Postman". The search bar is pre-populated with our query "Postman".
+
+<br>
+
+## Path Parameters
+
+### Path Variable
+Another way of passing request data to an API is via path variables (a.k.a. "path parameters"). A path variable is a dynamic section of a path and is often used for IDs and entity names such as usernames. 
+
+### Path Variable syntax
+The path variable comes immediately after a slash in the path. For example, the GitHub API allows you to search for GitHub users by providing a username in the path in place of `{username}` below: 
+
+`GET https://api.github.com/users/{username}`
+
+Making this API call with a value for `{username}` will fetch data about that user:
+
+`GET https://api.github.com/users/postmanlabs`
+
+You can have multiple path variables in a single request, such as this endpoint for getting a user's GitHub code repository:
+
+`GET https://api.github.com/repos/{owner}/{repoName}`
+
+For example, to get information about the `newman` code repository from `postmanlabs`:
+
+`GET https://api.github.com/repos/postmanlabs/newman`
+
+
+### Path vs. query parameters
+At first, it is easy to confuse these two parameter types. Let's compare them side by side. 
+
+| Path Variable        | Query parameters           |
+|----------------------|----------------------------|
+| ex: `/books/abc123`    | ex: `/books?search=borges&checkedOut=false` |
+| Located directly after a slash in the path. It can be anywhere on the path | Located only at the end of a path, right after a question mark ? |
+| Accepts dynamic values | Accepts defined query keys with potentially dynamic values. |
+| *Often used for IDs or entity names | *Often used for options and filters |
+
+**These are just conventions! Some APIs might ask you to pass an ID or username in a query parameter like this: `/users?username=getpostman`* 
+
+Note that some API documentation uses colon syntax to represent a wildcard in the path like `/users/:username`, while some use curly braces like `/users/{username}`. They both mean the same thing: that part of the path is dynamic!
