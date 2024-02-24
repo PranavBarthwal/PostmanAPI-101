@@ -1,3 +1,4 @@
+###### Postman Academy Documentation : https://academy.postman.com/path/postman-api-fundamentals-student-expert/postman-api-fundamentals-student-expert-certification-1/1811
 
 ###### Postman Doc Link : https://letsupgrade.notion.site/Postman-Student-Expert-Certification-in-2-Days-fd88d22299b74158a05aaf8723504ee9 
 <br>
@@ -27,6 +28,76 @@
 - They specify how different software components should **interact**, what **data** can be accessed or manipulated, and what **actions** can be performed.
 - APIs enable developers to access specific features or functionalities of another application without understanding its internal workings.
 - This fosters **interoperability** and facilitates the development of complex software systems by combining the capabilities of multiple components.
+
+<br>
+
+
+## Types of APIs
+
+
+
+### Types of APIs based on Access, Medium, and Architecture
+
+### 1. Access:
+
+- **Open APIs (Public APIs)**:
+   - These APIs are freely available to the public.
+   - Designed for wide usage and accessibility.
+   - Examples include social media APIs like Twitter, Facebook, etc.
+
+- **Internal APIs (Private APIs)**:
+   - Used within organizations for internal purposes.
+   - Not exposed to the public.
+   - Facilitate communication between internal systems or departments.
+
+- **Partner APIs (B2B APIs)**:
+   - Shared with trusted external partners or collaborators.
+   - More restricted access compared to open APIs.
+   - Used for sharing data and functionality with business partners.
+
+### 2. Medium:
+
+- **HTTP APIs**:
+   - Utilize HTTP/HTTPS protocol for communication.
+   - Commonly used for web-based APIs.
+   - Examples include RESTful APIs and SOAP APIs.
+
+- **WebSocket APIs**:
+   - Enable bidirectional communication between client and server.
+   - Suitable for real-time applications.
+   - Used for applications requiring low latency and high concurrency.
+
+- **GraphQL APIs**:
+   - Allow clients to query only the data they need.
+   - Provide a flexible and efficient approach to data retrieval.
+   - Commonly used for building APIs that serve client-specific data requirements.
+
+### 3. Architecture:
+
+- **RESTful APIs**:
+   - Follow the principles of Representational State Transfer (REST).
+   - Stateless communication between client and server.
+   - Use standard HTTP methods (GET, POST, PUT, DELETE).
+   - Represent resources as URIs.
+   - Examples include APIs for web services, e.g., Twitter API.
+
+- **SOAP APIs**:
+   - Based on the Simple Object Access Protocol (SOAP).
+   - Use XML for message format.
+   - Often used in enterprise environments.
+   - Known for strong reliability and transactional support.
+
+- **RPC APIs (Remote Procedure Call)**:
+   - Allow clients to execute procedures or functions on remote servers.
+   - Encapsulate function calls within network messages.
+   - Examples include gRPC, XML-RPC.
+
+- **Event-Driven APIs**:
+   - Facilitate communication between components through events.
+   - Decoupled architecture with event producers and consumers.
+   - Suitable for asynchronous and loosely coupled systems.
+
+These categorizations provide a comprehensive overview of different types of APIs based on their accessibility, communication medium, and architectural principles. The choice of API type depends on factors such as the specific use case, requirements, and constraints of the system being developed.
 
 <br>
 
@@ -93,6 +164,9 @@ In summary, Postman plays a crucial role in the entire lifecycle of APIs, from d
 
 ## Request-Response Pattern in APIs
 
+<img src="./Assets/Screenshot 2024-02-24 213752.png">
+
+
 ### 1. **Request Phase**:
    - **Client Sends Request**: The client, which could be a web browser, mobile application, or another server, sends a request to the API server. This request typically includes:
      - **Endpoint**: The specific URL or route that the client wants to access on the server.
@@ -139,6 +213,10 @@ To make a request, you typically need three essential ingredients:
      - **DELETE**: Remove a resource from the server.
      - And others like PATCH, HEAD, OPTIONS, etc.
 
+    <img src="Assets/Screenshot 2024-02-24 203720.png">
+    <img src="Assets/Screenshot 2024-02-24 204539.png">
+    <img src="Assets/Screenshot 2024-02-24 204757.png">
+
 2. **Address/Endpoint (URL)**:
    - The address or endpoint specifies the location of the resource on the server that you want to interact with. It's a unique identifier that the server uses to route your request to the appropriate handler. For example:
      ```
@@ -149,3 +227,37 @@ To make a request, you typically need three essential ingredients:
    - The path is a specific part of the URL that further specifies the location of the resource within the endpoint. It comes after the domain name and any optional parameters. For example, in the URL `https://api.example.com/users/123`, `/users/123` is the path, where `123` is a unique identifier for a specific user.
 
 These three ingredients, combined together, provide the necessary information for the client to communicate with the server and perform the desired action on the resource.
+
+<br>
+
+## Status Codes
+
+HTTP status codes are standardized responses that servers send back to clients (such as web browsers or API consumers) to indicate the success or failure of a request. Here's an overview of some common HTTP status codes:
+
+### 1xx Informational
+- **100 Continue**: The server has received the request headers and the client should proceed to send the request body.
+- **101 Switching Protocols**: The server is switching protocols per the client's request.
+
+### 2xx Success
+- **200 OK**: The request was successful.
+- **201 Created**: The request has been fulfilled, and a new resource has been created.
+- **204 No Content**: The server successfully processed the request but is not returning any content.
+
+### 3xx Redirection
+- **301 Moved Permanently**: The requested resource has been permanently moved to a new location.
+- **302 Found (Temporary Redirect)**: The requested resource has been temporarily moved to a different URI.
+- **304 Not Modified**: Indicates that the resource has not been modified since the version specified by the request headers.
+
+### 4xx Client Errors
+- **400 Bad Request**: The server cannot process the request due to a client error, such as malformed syntax.
+- **401 Unauthorized**: The request requires user authentication.
+- **403 Forbidden**: The server understood the request but refuses to authorize it.
+- **404 Not Found**: The server cannot find the requested resource.
+
+### 5xx Server Errors
+- **500 Internal Server Error**: A generic error message indicating that the server encountered an unexpected condition.
+- **502 Bad Gateway**: The server received an invalid response from an upstream server while attempting to fulfill the request.
+- **503 Service Unavailable**: The server is currently unable to handle the request due to temporary overload or maintenance.
+- **504 Gateway Timeout**: The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server.
+
+These status codes provide a standardized way for servers to communicate the outcome of a request, allowing clients to understand and respond appropriately. Understanding these status codes is essential for troubleshooting issues when working with web services or APIs.
