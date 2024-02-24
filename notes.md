@@ -466,3 +466,4 @@ In addition to getting variables, you can also set them with `pm.collectionVaria
 `pm.collectionVariables.set(“myVar”, “foo”)`
 
 
+<hr>
