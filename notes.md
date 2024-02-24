@@ -387,3 +387,27 @@ At first, it is easy to confuse these two parameter types. Let's compare them si
 **These are just conventions! Some APIs might ask you to pass an ID or username in a query parameter like this: `/users?username=getpostman`* 
 
 Note that some API documentation uses colon syntax to represent a wildcard in the path like `/users/:username`, while some use curly braces like `/users/{username}`. They both mean the same thing: that part of the path is dynamic!
+
+<br>
+
+## Authorization
+
+Think about why you might not want an API to have completely open endpoints that anyone can access publicly. It would allow unauthorized people to access data they shouldn't see, or allow bots to flood an API with thousands of calls per second and shut it down. 
+
+There are multiple methods for authorizing a request. Some examples are **Basic Auth** (username and password), **OAuth**(delegated authorization), and **API Keys** (secret strings registered to a developer from an API portal). 
+
+### Getting an API Key
+APIs that use API Key auth usually allow developers to sign up in a developer portal, where they will receive a random API Key that can be used to authorize their requests to the API. The API Key allows the API to track who is making calls and how often.  
+
+The Postman Library API v2 uses very light protection and does not require you to register for an API Key. You simply have to know it:
+
+Header name: `api-key` <br>
+Header value: `postmanrulz`
+
+As the documentation shows, the Postman Library API v2 requires adding this **header** to any requests for adding, updating and deleting books, since these operations change data in the database instead of simply reading them.
+
+### Headers
+Headers are how we can add **metadata** about our requests, such as authorization information or specify the data type we want to receive in a response. This is different than the actual payload data we send in the body of a request, such as our new book information.
+
+You can think of headers like the outside of an envelope when you send a letter. The envelope has information about delivering the letter, like proof that you've paid for postage. The actual data "payload" is the letter inside the envelope.
+
